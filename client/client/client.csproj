@@ -9,4 +9,8 @@
     <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="ReaLTaiizor" Version="3.8.1.1" />
+  </ItemGroup>
+
 </Project>
