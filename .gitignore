@@ -111,3 +111,58 @@ coverage/
 *.zip
 *.tar
 *.gz
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+*.whl
+
+# PyQt5
+*.ui
+*.pyc
+*.pyo
+*.pyd
+*.log
+*.tmp
+*.bak
+
+# IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Operating System files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Virtual Environment
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Pytest
+.cache/
+*.cover
+*.coverage
+nosetests.xml
+coverage.xml
+*.log
+
+# Other
+*.orig
+*.swp
+*.swo
+*.swn
