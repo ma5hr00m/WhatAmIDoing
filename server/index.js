@@ -44,14 +44,23 @@ let appInfoMap = new Map([
     }],
 ]);
 
+app.get('/ping', (req, res) => {
+    return res.status(200).json({ message: 'Pong!' });
+});
+
 app.post('/status/update', (req, res) => {
     const { application, timestamp } = req.body;
-    if (application !== undefined && timestamp !== undefined) {
+    if (application !== undefined && timestamp !== undefined && application !== applicationValue && timestamp > lastUpdateTimestamp) {
         applicationValue = application;
         lastUpdateTimestamp = new Date(timestamp);
         return res.status(200).json({ message: 'Application value updated successfully.' });
+    } else if (application === undefined && timestamp === undefined) {
+        return res.status(400).json({ error: 'Both application and timestamp keys are required.' });
+    } else if (application == applicationValue) {
+        return res.status(200).json({ message: 'Application value updated successfully.' });
+    } else {
+        return res.status(400).json({ error: 'Both application and timestamp keys are required.' });
     }
-    return res.status(400).json({ error: 'Application and timestamp keys are required.' });
 });
 
 app.get('/status/', (req, res) => {
@@ -102,6 +111,21 @@ app.post('/settings/appinfomap/update', (req, res) => {
     appInfoMap = new Map(Object.entries(newAppInfoMap));
     return res.status(200).json({ message: 'appInfoMap updated successfully.' });
 });
+
+app.get('/settings/appinfomap/get', (req, res) => {
+    try {
+        const appInfoObject = Object.fromEntries(appInfoMap);
+
+        return res.status(200).json({
+            message: "OK",
+            code: "1",
+            data: appInfoObject
+        });
+    } catch (error) {
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 
 app.use((err, req, res, next) => {
     console.error(err.stack);
