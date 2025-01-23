@@ -1,0 +1,106 @@
+.root {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.helloBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 12px;
+    animation: fadeInBounce 0.8s ease forwards;
+    opacity: 0;
+    animation-delay: .25s;
+}
+
+@keyframes fadeInBounce {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    30% {
+        opacity: 1;
+        transform: translateY(-15px);
+    }
+    50% {
+        transform: translateY(10px);
+    }
+    70% {
+        transform: translateY(-5px);
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.titleBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.logo {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    margin-right: 8px;
+    animation: rotate 6s linear infinite;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #303030;
+}
+
+.version {
+    margin-left: 4px;
+    font-size: 14px;
+    color: #303030;
+    font-weight: 400;       
+}
+
+.description {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    width: 320px;
+    text-align: center;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    color: #606060;
+}
+
+.linksBox {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+}
+
+.github {
+    border: none;
+    padding: 6px 18px;
+    border-radius: 40px;
+    background-color: #303030;
+    color: #fff;
+    font-size: 14px;
+    text-decoration: none;
+
+    &:hover {
+        background-color: #606060;
+    }
+}

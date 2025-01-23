@@ -65,16 +65,16 @@ namespace UI
             MaterialCard homePanel = CreateMaterialCard();
 
             // 创建标签并添加到“主页”面板
-            currentAppLabel = CreateMaterialLabel(20, Color.Black, FontStyle.Bold);
-            timeElapsedLabel = CreateMaterialLabel(16, Color.DarkGreen, FontStyle.Regular);
-            updateStatusLabel = CreateMaterialLabel(16, Color.DarkOrange, FontStyle.Regular);
-            lastUpdateTimestampLabel = CreateMaterialLabel(16, Color.Gray, FontStyle.Italic);
+            currentAppLabel = CreateMaterialLabel(16, Color.Black);
+            timeElapsedLabel = CreateMaterialLabel(12, Color.DarkGreen);
+            updateStatusLabel = CreateMaterialLabel(12, Color.DarkOrange);
+            lastUpdateTimestampLabel = CreateMaterialLabel(12, Color.Gray);
 
             // 将标签添加到“主页”面板
-            homePanel.Controls.Add(currentAppLabel);
-            homePanel.Controls.Add(timeElapsedLabel);
-            homePanel.Controls.Add(updateStatusLabel);
             homePanel.Controls.Add(lastUpdateTimestampLabel);
+            homePanel.Controls.Add(updateStatusLabel);
+            homePanel.Controls.Add(timeElapsedLabel);
+            homePanel.Controls.Add(currentAppLabel);
 
             // 将“主页”面板添加到“主页” TabPage
             homeTab.Controls.Add(homePanel);
@@ -92,13 +92,13 @@ namespace UI
         }
 
         // 封装一层MaterialLabel
-        private MaterialLabel CreateMaterialLabel(float fontSize, Color textColor, FontStyle fontStyle)
+        private MaterialLabel CreateMaterialLabel(float fontSize, Color textColor)
         {
             var label = new MaterialLabel
             {
                 Dock = DockStyle.Top,
                 TextAlign = ContentAlignment.MiddleCenter,
-                Font = new Font("Helvetica Neue", fontSize, fontStyle),
+                Font = new Font("Helvetica Neue", fontSize, FontStyle.Bold),
                 ForeColor = textColor,
                 Padding = new Padding(5),
                 BackColor = Color.Transparent,
@@ -106,6 +106,7 @@ namespace UI
             };
 
             label.MinimumSize = new Size(0, 30);
+
             return label;
         }
 
@@ -128,7 +129,7 @@ namespace UI
             currentAppLabel.Text = windowTitle;
             timeElapsedLabel.Text = $"已用时间: {elapsedTime.TotalSeconds:F0} s";
             updateStatusLabel.Text = updateSuccess ? "最后更新: 成功" : "最后更新: 失败";
-            lastUpdateTimestampLabel.Text = $"最后更新时间: {lastUpdateTime:HH:mm:ss}";
+            lastUpdateTimestampLabel.Text = $"最后更新时间: {lastUpdateTime:O}";
         }
 
         // 重写绘制事件

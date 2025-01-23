@@ -1,0 +1,3 @@
+@mixin radial-gradient-bg($inner-color, $outer-color) {
+    background: radial-gradient(circle at center, $inner-color, $outer-color);
+}
