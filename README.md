@@ -8,22 +8,24 @@
 
 ## client
 
-基于csharp开发的WhatAmIDoing本地客户端。
+基于Electron开发的WhatAmIDoing本地客户端。
 
-- [x] 引入ReaLTaiizor初步美化UI
-- [ ] 使用项目上报
+- [x] ~~引入ReaLTaiizor初步美化UI~~
+- [x] 技术栈winform->electron 
+- [ ] 数据本地持久化
 - [ ] 自定义服务端Url
 - [ ] 自定义本地轮询频率、初始状态、黑白名单软件
-- [ ] 窗口分页及设计美化
-- [ ] 自定义状态字典
+- [x] 窗口分页及设计美化
+- [x] 自定义状态字典
 - [ ] 提供对Linux/MacOS系统的支持
 
 ## server
 
 基于Express开发的WhatAmIDoing Web服务端。
 
-- [ ] 
-- [ ] 支持客户端上传状态字典
+- [x] 根据appInfo映射表响应数据
+- [x] 支持客户端上传appInfoMap
+- [ ] 数据持久化
 - [ ] 优化API结构
 - [ ] 添加认证功能
 - [ ] Docker部署
