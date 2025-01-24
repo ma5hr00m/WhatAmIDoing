@@ -24,10 +24,11 @@
 
 ## server
 
-基于Express开发的WhatAmIDoing Web服务端。
+基于Gin开发的WhatAmIDoing Web服务端。
 
 - [x] 根据appInfo映射表响应数据
 - [x] 支持客户端上传appInfoMap
+- [x] 使用Golang+Gin重构后端项目 
 - [ ] 优化API结构
 - [ ] 客户端用户身份认证
 - [ ] Docker部署
