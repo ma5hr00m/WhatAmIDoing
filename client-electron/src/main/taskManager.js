@@ -2,15 +2,6 @@ import { ipcMain, BrowserWindow, app } from 'electron'
 import axios from 'axios'
 const koffi = require('koffi')
 
-const userTracking = koffi.load('../../../UserTracking/x64/Release/UserTracking.dll')
-const GetActiveWindowAppName = userTracking.func(
-  '__stdcall',
-  'GetActiveWindowAppName',
-  'string',
-  []
-)
-const serverUrl = 'http://localhost:4000/status/update'
-
 let lastAppName = ''
 let lastSuccessTimestamp = 0
 let lastRequestSuccess = false
@@ -55,7 +46,7 @@ function sendUpdateAppNameMessage(appName) {
   })
 }
 
-function sendDataToServer(appName) {
+function sendDataToServer(serverUrl, appName) {
   const data = {
     application: appName,
     timestamp: Date.now()
@@ -81,36 +72,46 @@ function sendDataToServer(appName) {
     })
 }
 
-export function setupTaskManager() {
-  ipcMain.on('ping', () => console.log('pong'))
+export function setupTaskManager(props) {
+  console.log(props)
+  // eslint-disable-next-line solid/reactivity
+  const userTracking = koffi.load(props.trackingDllPath)
+  const GetActiveWindowAppName = userTracking.func(
+    '__stdcall',
+    'GetActiveWindowAppName',
+    'string',
+    []
+  )
+  // eslint-disable-next-line solid/reactivity
+  const serverApi = props.serverUrl + '/status/update'
+  // eslint-disable-next-line solid/reactivity
+  const pollingFrequency = props.pollingFrequency
 
-  let intervalId
+  ipcMain.on('ping', () => console.log('pong'))
 
   const startTask = () => {
     isTimerActive = true
-    intervalId = setInterval(async () => {
+    const intervalId = setInterval(async () => {
       const appName = GetActiveWindowAppName()
       if (typeof appName === 'string' && appName.length > 0) {
         if (appName !== lastAppName) {
           sendUpdateAppNameMessage(appName)
-          sendDataToServer(appName)
+          sendDataToServer(serverApi, appName)
           lastAppName = appName
         }
       } else {
         console.error('Failed to get active window app name.')
       }
-    }, 250)
+    }, pollingFrequency)
+    return intervalId
   }
 
   const stopTask = () => {
     isTimerActive = false
-    if (intervalId) {
-      clearInterval(intervalId)
-    }
   }
 
   app.on('window-all-closed', stopTask)
   app.on('before-quit', stopTask)
 
-  startTask()
+  return startTask()
 }

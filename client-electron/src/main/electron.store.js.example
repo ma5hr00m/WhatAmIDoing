@@ -1,0 +1,14 @@
+import Store from 'electron-store'
+
+const store = new Store()
+
+const gconfig = {
+  pollingFrequency: 1000,
+  serverUrl: '',
+  trackingDllPath: '',
+  blacklist: ['explorer']
+}
+
+store.set('gconfig', gconfig)
+
+export { store, gconfig }

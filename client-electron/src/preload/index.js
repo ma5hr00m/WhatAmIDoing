@@ -1,7 +1,14 @@
 import { contextBridge, ipcRenderer } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
 
-const api = {}
+const api = {
+  setStoreValue: (key, value) => {
+    ipcRenderer.send('setStore', key, value)
+  },
+  getStoreValue: (key) => {
+    return ipcRenderer.sendSync('getStore', key)
+  }
+}
 
 if (process.contextIsolated) {
   try {
@@ -15,9 +22,6 @@ if (process.contextIsolated) {
   window.api = api
 }
 
-/**
- * @description 向渲染进程暴露的API
- */
 contextBridge.exposeInMainWorld('electronAPI', {
   onUpdateAppName: (callback) => ipcRenderer.on('update-app-name', callback)
 })
