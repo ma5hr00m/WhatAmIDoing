@@ -38,7 +38,6 @@ ipcMain.on('setStore', (_, key, value) => {
   store.set(key, value)
   let newConfig = store.get('gconfig')
   Object.assign(gconfig, newConfig)
-  console.log(gconfig)
   startTaskWithConfig(gconfig)
 })
 

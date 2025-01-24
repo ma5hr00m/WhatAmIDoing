@@ -69,7 +69,6 @@ export function createWindow() {
       mainWindow.setSkipTaskbar(false)
     })
     mainWindow.setSkipTaskbar(true)
-    console.log('Minimizing to tray')
   })
 
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {

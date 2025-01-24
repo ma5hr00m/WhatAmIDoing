@@ -30,50 +30,55 @@ function Settings() {
   }
 
   return (
-    <div class={styles.settingContainer}>
-      <hgroup class={styles.header}>
-        <h2>设置</h2>
-      </hgroup>
-      <div class={styles.formGroup}>
-        <h3>服务端地址</h3>
-        <form onSubmit={handleServerUrlSubmit}>
-          <input
-            type="text"
-            value={serverUrl()}
-            onInput={(e) => setServerUrl(e.target.value)}
-            class={styles.inputField}
-          />
-          <button type="submit" class={styles.submitButton}>
-            提交
-          </button>
-        </form>
-      </div>
-      <div class={styles.formGroup}>
-        <h3>轮询频率</h3>
-        <form onSubmit={handlePollingFrequencySubmit}>
-          <input
-            type="text"
-            value={pollingFrequency()}
-            onInput={(e) => setPollingFrequency(e.target.value)}
-            class={styles.inputField}
-          />
-          <button type="submit" class={styles.submitButton}>
-            提交
-          </button>
-        </form>
-      </div>
-      <div class={styles.formGroup}>
-        <h3>应用黑名单</h3>
-        <form onSubmit={handleBlacklistSubmit}>
-          <textarea
-            value={blacklist()}
-            onInput={(e) => setBlacklist(e.target.value)}
-            class={styles.textareaField}
-          />
-          <button type="submit" class={styles.submitButton}>
-            提交
-          </button>
-        </form>
+    <div class={styles.root}>
+      <div class={styles.settingBox}>
+        <hgroup>
+          <h2>设置</h2>
+        </hgroup>
+        <div class={styles.formGroup}>
+          <h3>服务端地址</h3>
+          <form class={styles.serverUrlSubmit} onSubmit={handleServerUrlSubmit}>
+            <input
+              type="text"
+              value={serverUrl()}
+              onInput={(e) => setServerUrl(e.target.value)}
+              class={styles.inputField}
+              spellCheck="false"
+            />
+            <button type="submit" class={styles.submitButton}>
+              提交
+            </button>
+          </form>
+        </div>
+        <div class={styles.formGroup}>
+          <h3>轮询频率</h3>
+          <form class={styles.pollingFrequencySubmit} onSubmit={handlePollingFrequencySubmit}>
+            <input
+              type="text"
+              value={pollingFrequency()}
+              onInput={(e) => setPollingFrequency(e.target.value)}
+              class={styles.inputField}
+              spellCheck="false"
+            />
+            <button type="submit" class={styles.submitButton}>
+              提交
+            </button>
+          </form>
+        </div>
+        <div class={styles.formGroup}>
+          <h3>应用黑名单</h3>
+          <form class={styles.blacklistSubmit} onSubmit={handleBlacklistSubmit}>
+            <textarea
+              value={blacklist()}
+              onInput={(e) => setBlacklist(e.target.value)}
+              class={styles.textareaField}
+              spellCheck="false"
+            />
+            <button type="submit" class={styles.submitButton}>
+              提交
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   )
